@@ -27,3 +27,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# fuck node modules
+./node_modules
+/node_modules
+node_modules
+*/node_modules
