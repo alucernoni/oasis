@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     # GET '/me'
     def show
         if current_user
-            render json: current_user, status: :token
+            render json: current_user, status: :ok
         else
             render json: {errors: 'No active session'}, status: :unauthorized
         end
