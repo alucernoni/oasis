@@ -45,6 +45,34 @@ function SignupPage({setUserSignup}) {
     const handleSignup = (e) => {
         e.preventDefault();
         
+        const userSignup = {
+            first_name: signupInfo.first_name,
+            last_name: signupInfo.last_name,
+            username: signupInfo.username,
+            email: signupInfo.email,
+            city: signupInfo.city,
+            state: signupInfo.state,
+            zipcode: signupInfo.zipcode,
+            password: signupInfo.password,
+            password_confirmation: signupInfo.password_confirmation
+        }
+
+        const config = {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(userSignup)
+        }
+
+        fetch ('/signup', config)
+        .then((r) => {
+            if (r.ok) {
+                r.json().then((user) => setUserSignup(user))
+                navigate('/homepage')
+            } else {
+                r.json().then((err) => setErrors(err.errors))
+                navigate('/signup')
+            }
+        })
     }
 
     const handleLoginClick = () => {
