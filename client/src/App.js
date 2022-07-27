@@ -36,6 +36,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LoginPage setUserLogin={setUser}/>}/>
         <Route path= "/signup" element={<SignupPage setUserSignup={setUser} />} />
+        <Route path="/homepage" element={<HomePage/>}/>
       </Routes>
     </>
   )

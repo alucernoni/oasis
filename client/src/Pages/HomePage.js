@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import PlantsContainer from '../Components/PlantsContainer'
+
+
 
 function HomePage() {
+
   return (
-    <div>HomePage</div>
+    <div>
+        rendering homepage
+        <PlantsContainer />
+    </div>
   )
 }
 
