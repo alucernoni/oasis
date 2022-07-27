@@ -1,6 +1,9 @@
 import React from 'react'
 
-function PlantCard() {
+function PlantCard({plant}) {
+
+    
+
   return (
     <div>PlantCard</div>
   )
