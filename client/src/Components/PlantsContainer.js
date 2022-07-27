@@ -15,12 +15,14 @@ function PlantsContainer() {
         dispatch(fetchPlants())
     }, [dispatch])
 
-    console.log("plants?", plantsArray)
+    // console.log("plants?", plantsArray)
 
+    const plantsDisplay = plantsArray.map((plant) => <PlantCard key={plant.id} plant={plant}/>)
 
   return (
     <div>
         PlantsContainer
+        {plantsDisplay}
     </div>
   )
 }

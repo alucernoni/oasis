@@ -5,6 +5,7 @@ class CreatePlants < ActiveRecord::Migration[7.0]
       t.string :scientific_name
       t.text :description
       t.text :care_and_conditions_overview
+      t.string :plant_image_url
       t.integer :difficulty_level
       t.boolean :on_wishlist, default: false
       t.boolean :is_owned, default: false
