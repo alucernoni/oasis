@@ -68,5 +68,17 @@ corn_plant = Plant.create(common_name: "Corn Plant", scientific_name: "Dracaena 
 jade_plant = Plant.create(common_name: "Jade Plant", scientific_name: "Crassula ovata", description: "A branched, succulent shrub commonly grown indoors, jade plant features thick, woody stems and glossy green, fleshy, oblong leaves up to two inches long. Happily, this low-maintenance plant lives a long time, taking on the appearance of a miniature tree as it ages.", care_and_conditions_overview: "Jade plant prefers infrequent, deep watering sessions every couple weeks (could be two weeks to a month, don't water before top inch of soil is dry). Jade performs best in full sun and may start looking leggy in lower light conditions.", difficulty_level: "2")
 flamingo_plant = Plant.create(common_name: "Flamingo Lily or Flamingo Flower Plant", scientific_name: "Anthurium andraeanum", description: "Flamingo Flower Plant is a herbaceous evergreen plant with dark green, glossy, heart-shaped leaves. It is complemented by a continuous display of bright, waxy, red or pink heart-shaped spathes with yellow spadices.", care_and_conditions_overview: "Flamingo Flower plants grow best in bright indirect light, and while they can tolerate lower light, they do not like full sun. A soil mix (50/50) of potting soil and perlite or well-draining orchid soil would be ideal, but it is fine in regular soil as well. This plant likes regular watering, once soil is dry to the touch. If it dries out completely, soak the pot in a dish of water for an hour to re-hydrate the root ball, and do not overwater.", difficulty_level: "2")
 
+puts "Seeding plant tolerances..."
+
+snake_plant_tolerance = PlantTolerate.create(plant: snake_plant, low_light: true, indirect_light: true, full_light: true, drought: true, overwatering: false)
+zz_plant_tolerance = PlantTolerate.create(plant: zz_plant, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
+pothos_tolerance = PlantTolerate.create(plant: pothos, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: true)
+peace_lily_tolerance = PlantTolerate.create(plant: peace_lily, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
+pilea_tolerance = PlantTolerate.create(plant: pilea, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
+monstera_deliciosa_tolerance = PlantTolerate.create(plant: monstera_deliciosa, low_light: false, indirect_light: true, full_light: true, drought: false, overwatering: true)
+spider_plant_tolerance = PlantTolerate.create(plant: spider_plant, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
+corn_plant_tolerance = PlantTolerate.create(plant: corn_plant, low_light: true, indirect_light: true, full_light: false, drought: false, overwatering: true)
+jade_plant_tolerance = PlantTolerate.create(plant: jade_plant, low_light: false, indirect_light: true, full_light: true, drought: true, overwatering: true)
+flamingo_plant_tolerance = PlantTolerate.create(plant: flamingo_plant, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
 
 puts "Seeding done!"

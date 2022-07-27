@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_27_060512) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_27_162152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plant_tolerates", force: :cascade do |t|
+    t.bigint "plant_id", null: false
+    t.boolean "low_light", default: false
+    t.boolean "indirect_light", default: true
+    t.boolean "full_light", default: false
+    t.boolean "drought", default: false
+    t.boolean "overwatering", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_plant_tolerates_on_plant_id"
+  end
 
   create_table "plants", force: :cascade do |t|
     t.string "common_name"
@@ -42,4 +54,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_060512) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "plant_tolerates", "plants"
 end
