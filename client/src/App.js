@@ -32,21 +32,21 @@ function App() {
 
   if (!user) return (
     <>
-      <NavBar/>
+      <NavBar user={user} setUser={setUser} />
       <Routes>
         <Route exact path="/" element={<LoginPage setUserLogin={setUser}/>}/>
-        <Route path= "/signup" element={<SignupPage/>} />
+        <Route path= "/signup" element={<SignupPage setUserSignup={setUser} />} />
       </Routes>
     </>
   )
   
     return (
       <div className="App">
-        <NavBar/>
+        <NavBar user={user} setUser={setUser}/>
         <Routes>
           <Route path="/homepage" element={<HomePage/>}/>
         </Routes>
-        <h1>Page Count: bullsheeit</h1>
+        <h1>App render</h1>
       </div>
     );
   }

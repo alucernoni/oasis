@@ -20,6 +20,7 @@ function LoginPage({setUserLogin}) {
   const [isLoading, setIsLoading] = useState(false)  
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+  
 
   const handleChange = (e) => {
     setLoginInfo({
@@ -43,7 +44,7 @@ function LoginPage({setUserLogin}) {
     .then(r => {
         if (r.ok) {
             r.json().then((user) => setUserLogin(user))
-            // navigate('/homepage')
+            navigate('/homepage')
         } else {
             r.json().then((err) => {
                 setErrors(err.errors)
@@ -53,7 +54,9 @@ function LoginPage({setUserLogin}) {
     })
   }
 
-
+  const handleSignupClick = () => {
+    navigate('/signup')
+  }
 
   return (
     <div>
@@ -98,6 +101,9 @@ function LoginPage({setUserLogin}) {
                 </FormControl>
                 <FormControl>
                     <Button type='submit' >Log In</Button>
+                </FormControl>
+                <FormControl>
+                    <Button onClick={handleSignupClick}>If you're new to Oasis, sign up instead!</Button>
                 </FormControl>
             </Stack>
             <Stack spacing={3}>
