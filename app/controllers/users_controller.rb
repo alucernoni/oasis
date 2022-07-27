@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
     # POST '/signup'
     def create 
-        user = User.create!(user_params)
+        user = User.create!(signup_params)
             session[:user_id] = user.id
             render json: user, status: :created
     end
@@ -25,6 +25,10 @@ class UsersController < ApplicationController
 
     def user_params
         params.permit(:username, :password, :password_confirmation)
+    end
+
+    def signup_params
+        params.permit(:first_name, :last_name, :username, :email, :city, :state, :zipcode, :password, :password_confirmation)
     end
 
 end
