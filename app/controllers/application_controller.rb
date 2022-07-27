@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
-    before_action :authorize_user
+    before_action :authenticate_user
 
     # def hello_world 
     #     session[:count] = (session[:count] || 0) + 1
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
         @current_user ||= User.find_by_id(session[:user_id])
     end
 
-    def authorize_user
+    def authenticate_user
         return if current_user
         render json: {errors: "You must be logged in to do that."}, status: :unauthorized
     end
