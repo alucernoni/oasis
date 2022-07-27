@@ -35,11 +35,11 @@ class PlantsController < ApplicationController
     end
 
     def plant_params
-        params.permit(:common_name, :scientific_name, :description, :care_and_conditions_overview, :difficulty_level)
+        params.permit(:common_name, :scientific_name, :description, :care_and_conditions_overview, :plant_image_url, :difficulty_level)
     end
 
     def update_plant_params
-        params.permit(:plant_nickname, :common_name, :scientific_name, :description, :care_and_conditions_overview, :difficulty_level, :on_wishlist, :is_owned)
+        params.permit(:plant_nickname, :common_name, :scientific_name, :description, :care_and_conditions_overview, :plant_image_url, :difficulty_level, :on_wishlist, :is_owned)
     end
 
     # def authorize_user
