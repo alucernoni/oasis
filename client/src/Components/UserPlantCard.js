@@ -1,7 +1,7 @@
 import React from 'react'
 import {Center, Box, Stack, Image, Text, useColorModeValue, Heading} from '@chakra-ui/react'
 
-function PlantCard({plant}) {
+function UserPlantCard({plant}) {
 
 
   return (
@@ -49,7 +49,7 @@ function PlantCard({plant}) {
                 </Box>
                 <Stack pt={10} align={'center'}>
                   <Text color={'black'} fontWeight={600} fontSize={'xl'} textTransform={'uppercase'}>
-                    {plant.common_name}
+                    {plant.plant_nickname} the {plant.common_name}
                   </Text>
                   <Text as="i" >
                     {plant.scientific_name}
@@ -69,4 +69,4 @@ function PlantCard({plant}) {
   )
 }
 
-export default PlantCard
+export default UserPlantCard

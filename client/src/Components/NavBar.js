@@ -19,6 +19,7 @@ function NavBar({user, setUser}) {
         <nav>
             <Stack direction="row">
                 <NavLink to="/homepage">Home</NavLink>
+                <NavLink to="/profile">Profile</NavLink>
                 {user ? <Button onClick={handleLogOut} >Log Out</Button> : null}
             </Stack>
         </nav>

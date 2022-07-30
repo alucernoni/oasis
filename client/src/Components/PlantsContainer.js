@@ -17,7 +17,7 @@ function PlantsContainer() {
 
     // console.log("plants?", plantsArray)
 
-    const plantsDisplay = plantsArray.map((plant) => <PlantCard key={plant.id} plant={plant}/>)
+    const plantsDisplay = plantsArray.length > 0 ? plantsArray.map((plant) => <PlantCard key={plant.id} plant={plant}/>) : null
 
   return (
     <div>
