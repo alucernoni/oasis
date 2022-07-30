@@ -17,6 +17,9 @@ Plant.reset_pk_sequence
 PlantTolerate.destroy_all
 PlantTolerate.reset_pk_sequence
 
+UserPlantTask.destroy_all
+UserPlantTask.reset_pk_sequence
+
 puts "Seeding users..."
 
 Annemarie = User.create(
@@ -83,5 +86,11 @@ spider_plant_tolerance = PlantTolerate.create(plant: spider_plant, low_light: tr
 corn_plant_tolerance = PlantTolerate.create(plant: corn_plant, low_light: true, indirect_light: true, full_light: false, drought: false, overwatering: true)
 jade_plant_tolerance = PlantTolerate.create(plant: jade_plant, low_light: false, indirect_light: true, full_light: true, drought: true, overwatering: true)
 flamingo_plant_tolerance = PlantTolerate.create(plant: flamingo_plant, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
+
+puts "Seeding user_plant joiner..."
+
+annemarie_plants = User.find(1).add_plants([1, 2, 3, 5, 8, 9, 10])
+caroline_plants = User.find(2).add_plants([3, 4, 6, 7, 9,])
+josie_plants = User.find(3).add_plants([1, 3, 4, 7])
 
 puts "Seeding done!"
