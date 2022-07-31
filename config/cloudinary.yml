@@ -1,0 +1,11 @@
+development: 
+  cloud_name: "oasiscloud"
+  api_key: "181934539793869"
+  api_secret: "-FDlkl8JnyWYug9LbuEieUPqP_A"
+  secure: true
+
+production:
+  cloud_name: "oasiscloud"
+  api_key: "181934539793869"
+  api_secret: "-FDlkl8JnyWYug9LbuEieUPqP_A"
+  secure:true

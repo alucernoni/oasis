@@ -12,6 +12,8 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import { useState, useEffect } from "react";
 import {Routes, Route} from 'react-router-dom'
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary } from "@cloudinary/url-gen";
 import NavBar from './Components/NavBar';
 import LoginPage from './Pages/LoginPage'
 import SignupPage from './Pages/SignupPage';
@@ -33,6 +35,30 @@ function App() {
     })
   }, [])
 
+  // Create a Cloudinary instance and set your cloud name.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'oasiscloud'
+    }
+  });
+
+  const updateUser = (newdata) =>{
+    
+  }
+
+
+  // cloud_name: "oasiscloud"
+  // api_key: "181934539793869"
+  // api_secret: "-FDlkl8JnyWYug9LbuEieUPqP_A"
+  // secure: true
+
+  // cld.image returns a CloudinaryImage with the configuration set.
+  const myImage = cld.image('sample');
+
+  // The URL of the image is: https://res.cloudinary.com/demo/image/upload/sample
+
+  // Render the image in a React component.
+
   if (!user) return (
     <>
       <NavBar user={user} setUser={setUser} />
@@ -49,7 +75,7 @@ function App() {
         <NavBar user={user} setUser={setUser}/>
         <Routes>
           <Route path="/homepage" element={<HomePage/>}/>
-          <Route path="/profile" element={<ProfilePage user={user} setUser={setUser}/>} />
+          <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} updateUser={updateUser}/>} />
           <Route path= "/myplants" element= {<MyPlantsPage user={user}/>} />
           <Route path= "/wishlist" element= {<Wishlist user={user}/>} />
         </Routes>

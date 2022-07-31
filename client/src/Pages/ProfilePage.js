@@ -3,10 +3,12 @@ import React, {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 
 
-function ProfilePage({user}) {
+function ProfilePage({user, updateUser}) {
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const [showPassword, setShowPassword] = useState(false)
+    const [imageSelected, setImageSelected] = useState("")
+    const [imageURL, setImageURL] = useState("")
 
     const initialState = {
         first_name: `${user.first_name}`,
@@ -18,8 +20,8 @@ function ProfilePage({user}) {
         city: `${user.city}`,
         state: `${user.state}`,
         zipcode: `${user.zipcode}`,
-        password: "",
-        password_confirmation: ""
+        // password: "",
+        // password_confirmation: ""
     }
 
     const [newUserData, setNewUserData] = useState(initialState)
@@ -29,6 +31,50 @@ function ProfilePage({user}) {
         setNewUserData({
             ...newUserData,
             [e.target.name]: e.target.value
+        })
+    }
+
+    const saveChanges = (e) => {
+        e.preventDefault();
+
+        const imageFormData = new FormData()
+        imageFormData.append("file", imageSelected)
+        imageFormData.append("upload_preset", "oasis_preset")
+        imageFormData.append("cloud_name", "oasiscloud")
+        console.log("imageselected:", imageSelected)
+
+        fetch("https://api.cloudinary.com/v1_1/oasiscloud/image/upload",{
+            method:"POST",
+            body: imageFormData
+        })
+        .then((r) => r.json())
+        .then((data) => setImageURL(data.url))
+        // .catch((err) => console.log(err))
+        .then(() => {
+            const updatedProfile = {
+                first_name: newUserData.first_name,
+                last_name: newUserData.last_name,
+                username: newUserData.username,
+                bio: newUserData.bio,
+                profile_image: imageURL,
+                email: newUserData.email,
+                city: newUserData.city,
+                state: newUserData.state,
+                zipcode: newUserData.zipcode,
+                password: newUserData.password,
+                password_confirmation: newUserData.password_confirmation
+                }
+            const config = {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(updatedProfile)
+                }
+            fetch(`/users/${user.id}`, config)
+            .then(r => r.json())
+            // .then(updateUser)
+            .then(setNewUserData(initialState))
         })
     }
 
@@ -149,7 +195,7 @@ function ProfilePage({user}) {
                             name= "profile_image"
                             id= "profile_image"
                             // value= {newUserData.profile_image}
-                            onChange={handleChange} />
+                            onChange={(e) => setImageSelected(e.target.files[0])} />
                         </FormControl>
                         <FormControl mt={4}>
                             <FormLabel>Email</FormLabel>
@@ -181,6 +227,10 @@ function ProfilePage({user}) {
                             value= {newUserData.zipcode}
                             onChange={handleChange} />
                         </FormControl>
+                        <FormControl>
+                        <Button type='submit' disabled={isInvalid} onClick={saveChanges}>Save Changes</Button>
+                        {/* <FormHelperText>If Sign Up! button is unclickable, please doublecheck that your password entries match!</FormHelperText> */}
+                    </FormControl>
                     </ModalBody>
                 </ModalContent>
             </Modal>
