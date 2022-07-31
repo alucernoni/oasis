@@ -21,6 +21,11 @@ class UsersController < ApplicationController
             render json: user, status: :created
     end
 
+    def update 
+        user = User.find_by(id: params[:id]).update!(update_params)
+        render json: user, status: :accepted
+    end
+
     private
 
     def user_params
@@ -29,6 +34,10 @@ class UsersController < ApplicationController
 
     def signup_params
         params.permit(:first_name, :last_name, :username, :email, :city, :state, :zipcode, :password, :password_confirmation)
+    end
+
+    def update_params
+        params.permit(:first_name, :last_name, :username, :bio, :profile_image, :email, :city, :state, :zipcode, :password, :password_confirmation)
     end
 
 end

@@ -57,3 +57,5 @@ gem "active_model_serializers",
 
   gem "faker"
 
+  gem 'cloudinary'
+
