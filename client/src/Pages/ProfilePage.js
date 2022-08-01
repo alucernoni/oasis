@@ -1,6 +1,7 @@
 import { Center, Box, Image, Stack, Text, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, InputRightElement, InputGroup, FormHelperText } from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
+import ProfileMap from '../Components/ProfileMap'
 
 
 function ProfilePage({user, updateUser}) {
@@ -246,6 +247,7 @@ function ProfilePage({user, updateUser}) {
         <Text>{user.bio}</Text>
         <NavLink to='/myplants'>See my plants</NavLink>
         <NavLink to="/wishlist">View Wishlist</NavLink>
+        <ProfileMap/>
     </Stack>
     </Center>
   )
