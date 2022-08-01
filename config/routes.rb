@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :plant_wants
   resources :user_plant_tasks
   resources :plant_tolerates
   resources :plants

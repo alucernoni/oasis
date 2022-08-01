@@ -17,6 +17,9 @@ Plant.reset_pk_sequence
 PlantTolerate.destroy_all
 PlantTolerate.reset_pk_sequence
 
+PlantWant.destroy_all
+PlantTolerate.reset_pk_sequence
+
 UserPlantTask.destroy_all
 UserPlantTask.reset_pk_sequence
 
@@ -86,6 +89,19 @@ spider_plant_tolerance = PlantTolerate.create(plant: spider_plant, low_light: tr
 corn_plant_tolerance = PlantTolerate.create(plant: corn_plant, low_light: true, indirect_light: true, full_light: false, drought: false, overwatering: true)
 jade_plant_tolerance = PlantTolerate.create(plant: jade_plant, low_light: false, indirect_light: true, full_light: true, drought: true, overwatering: true)
 flamingo_plant_tolerance = PlantTolerate.create(plant: flamingo_plant, low_light: true, indirect_light: true, full_light: false, drought: true, overwatering: false)
+
+puts "Seeding plant wants..."
+snake_plant_wants = PlantWant.create(plant: snake_plant, ideal_water_frequency: "Every 1-2 weeks, up to 1x/month in the winter", ideal_light_level: "Bright, indirect light", ideal_food_frequency: "Once or twice a year in spring and/or summer")
+zz_plant_wants = PlantWant.create(plant: zz_plant, ideal_water_frequency: "Every 2-3 weeks, less in winter", ideal_light_level: "Indirect light", ideal_food_frequency: "Twice in spring/summer, two months apart")
+pothos_wants = PlantWant.create(plant: pothos, ideal_water_frequency: "Every 1-2 weeks, less in low light", ideal_light_level: "Bright, indirect light", ideal_food_frequency: "Every 4-6 weeks during spring and summer")
+peace_lily_wants = PlantWant.create(plant: peace_lily, ideal_water_frequency: "Once a week", ideal_light_level: "Indirect light", ideal_food_frequency: "Every 2 months during spring and summer")
+pilea_wants = PlantWant.create(plant: pilea, ideal_water_frequency: "Every 1-2 weeks, less in low light", ideal_light_level: "Bright, indirect light", ideal_food_frequency: "Every 4-6 weeks during spring and summer, at half strength")
+monstera_deliciosa_wants = PlantWant.create(plant: monstera_deliciosa, ideal_water_frequency: "Every 1-2 weeks, thoroughly and consistently", ideal_light_level: "Bright, indirect light", ideal_food_frequency: "Every 4-6 weeks during spring and summer")
+spider_plant_wants = PlantWant.create(plant: spider_plant, ideal_water_frequency: "Once a week, longer if soil still damp", ideal_light_level: "Bright, indirect light", ideal_food_frequency: "Every 2 months during spring and summer")
+corn_plant_wants = PlantWant.create(plant: corn_plant, ideal_water_frequency: "Every 1-2 weeks, thoroughly and consistently", ideal_light_level: "Indirect light", ideal_food_frequency: "Every 2 months during spring and summer, less if in low light")
+jade_plant_wants = PlantWant.create(plant: jade_plant, ideal_water_frequency: "Every 2-4 weeks, thoroughly, once top 1-2 inches of soil is dry", ideal_light_level: "Bright light, bright indirect light while plant is young", ideal_food_frequency: "Every 3 months during spring and summer")
+flamingo_plant_wants = PlantWant.create(plant: flamingo_plant, ideal_water_frequency: "Once a week, every other week in the winter", ideal_light_level: "Bright, indirect light", ideal_food_frequency: "Every 3 months during spring and summer, at quarter-strength")
+
 
 puts "Seeding user_plant joiner..."
 
