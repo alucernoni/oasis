@@ -79,8 +79,8 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <Routes>
         <Route exact path= "/" element= {<LoginPage setUserLogin={setUser}/>}/>
-        <Route path= "/signup" element= {<SignupPage setUserSignup={setUser} />} />
-        <Route path= "/homepage" element= {<HomePage/>}/>
+        <Route exact path= "/signup" element= {<SignupPage setUserSignup={setUser} />} />
+        <Route exact path= "/homepage" element= {<HomePage/>}/>
       </Routes>
     </>
   )
@@ -89,10 +89,10 @@ function App() {
       <div className="App">
         <NavBar user={user} setUser={setUser}/>
         <Routes>
-          <Route path="/homepage" element={<HomePage/>}/>
-          <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} />} />
-          <Route path= "/myplants" element= {<MyPlantsPage user={user}/>} />
-          <Route path= "/wishlist" element= {<Wishlist user={user}/>} />
+          <Route exact path="/homepage" element={<HomePage/>}/>
+          <Route exact path="/profile" element={<ProfilePage user={user} setUser={setUser} />} />
+          <Route exact path= "/myplants" element= {<MyPlantsPage user={user}/>} />
+          <Route exact path= "/wishlist" element= {<Wishlist user={user}/>} />
         </Routes>
         <h1>App render</h1>
       </div>

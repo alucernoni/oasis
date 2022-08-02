@@ -6,18 +6,18 @@ function PlantCard({plant}) {
 
   const {isOpen, onOpen, onClose} = useDisclosure()
 
-  const plantWants = plant.plant_wants.map((want) => want)
-  // const plantTolerates = plant.plant_tolerates.map((tolerate) => tolerate)
-  const plantTolerateOptions = plant.plant_tolerates.map((option) => option)
+  const plantWants = plant.plant_wants?.map((want) => want)
+  // // const plantTolerates = plant.plant_tolerates.map((tolerate) => tolerate)
+  const plantTolerateOptions = plant.plant_tolerates?.map((option) => option)
   const toleratesOptions = plantTolerateOptions[0]
 
   const plantToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === true)
   const plantNoToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === false)
 
-  console.log("planttoleratesoptions", plantTolerateOptions)
-  console.log("tolerates obj?", toleratesOptions)
-  console.log("plant tolerates true?", plantToleratesArray)
-  console.log("plants tolerates false?", plantNoToleratesArray)
+  // console.log("planttoleratesoptions", plantTolerateOptions)
+  // console.log("tolerates obj?", toleratesOptions)
+  // console.log("plant tolerates true?", plantToleratesArray)
+  // console.log("plants tolerates false?", plantNoToleratesArray)
 
   return (
     <Center>
@@ -91,7 +91,7 @@ function PlantCard({plant}) {
                               <Text>Ideal Watering: {plantWants[0].ideal_water_frequency}</Text>
                               <Text>Ideal Light: {plantWants[0].ideal_light_level}</Text>
                               <Text>Ideal Fertilization: {plantWants[0].ideal_food_frequency}</Text>
-                              <Text fontWeight="bold">{plant.common_name} will tolerate:</Text>
+                              {/* <Text fontWeight="bold">{plant.common_name} will tolerate:</Text> */}
 n                            </Stack>
                           </ModalBody>
                       </ModalContent>

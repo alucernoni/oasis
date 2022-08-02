@@ -18,9 +18,10 @@ function ProfilePage({user}) {
         dispatch(fetchPlants())
     }, [dispatch])
 
+
     const waterAlerts = () => {
         // console.log("plantsArray in profile", JSON.stringify(plantsArray, null, 2))
-        const filterPlantsWaterArray = plantsArray.filter((plant) => {
+        const filterPlantsWaterArray = plantsArray?.filter((plant) => {
             const now = moment()
             const lastWatered = moment(plant.date_last_watered)
             const nextWatering = lastWatered.add(plant.watering_interval_days, "days")
@@ -30,12 +31,27 @@ function ProfilePage({user}) {
         // console.log("water filter:", filterPlantsWaterArray)
         return filterPlantsWaterArray.map((plant) => (
         <Stack direction="row">
-            <Alert key={plant.id}>
+            <Alert key={plant.id} plant={plant}>
                 {plant.common_name} needs water!
             </Alert> 
-            <Button> Mark as watered! </Button>
+            <Button plant={plant} onClick={() => handleWatered(plant)}> Mark as watered! </Button>
         </Stack>
         ))
+    }
+
+    const handleWatered = (plant) => {
+        
+        const updateWatering = {
+            date_last_watered: moment().format()
+        }
+
+        const config = {
+            method: "PATCH",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(updateWatering)
+        }
+        fetch(`plants/${plant.id}`, config)
+        .then(r => r.json())
     }
 
 
