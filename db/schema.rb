@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_215344) do
     t.text "care_and_conditions_overview"
     t.string "plant_image_url"
     t.integer "difficulty_level"
+    t.integer "watering_interval_days"
+    t.string "date_last_watered"
     t.boolean "on_wishlist", default: false
     t.boolean "is_owned", default: false
     t.string "plant_nickname", default: "null"
