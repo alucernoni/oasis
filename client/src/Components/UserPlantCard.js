@@ -3,6 +3,7 @@ import {Center, Box, Stack, Image, Text, useColorModeValue, Heading} from '@chak
 
 function UserPlantCard({plant}) {
 
+    const nicknamePlaceholder = (plant.plant_nickname === "null") ? plant.plant_nickname = " " : plant.plant_nickname
 
   return (
     <Center>
@@ -49,7 +50,7 @@ function UserPlantCard({plant}) {
                 </Box>
                 <Stack pt={10} align={'center'}>
                   <Text color={'black'} fontWeight={600} fontSize={'xl'} textTransform={'uppercase'}>
-                    {plant.plant_nickname} the {plant.common_name}
+                    {nicknamePlaceholder} the {plant.common_name}
                   </Text>
                   <Text as="i" >
                     {plant.scientific_name}

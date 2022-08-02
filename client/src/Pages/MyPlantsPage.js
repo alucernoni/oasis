@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import UserPlantCard from '../Components/PlantCard'
+import UserPlantCard from '../Components/UserPlantCard'
 import {Center, Text} from '@chakra-ui/react'
 
 function MyPlantsPage({user}) {
