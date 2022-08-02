@@ -1,5 +1,6 @@
 import React from 'react'
 import {Center, Box, Stack, Image, Modal, ModalHeader, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, Text, useDisclosure, useColorModeValue, Heading, Button} from '@chakra-ui/react'
+import PlantUpdateForm from './PlantUpdateForm'
 
 function PlantCard({plant}) {
 
@@ -53,6 +54,7 @@ function PlantCard({plant}) {
                       filter: 'blur(20px)',
                     },
                   }}>
+                  <PlantUpdateForm plant={plant}/>
                   <Image
                     rounded={'lg'}
                     height={230}
