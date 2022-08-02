@@ -31,7 +31,7 @@ class PlantWantsController < ApplicationController
     end
 
     def wants_params
-        params.permit(:ideal_water_frequency, :ideal_light_level, :ideal_food_frequency)
+        params.permit(:ideal_water_frequency, :ideal_light_level, :ideal_food_frequency :plant)
     end
 
 end

@@ -8,11 +8,11 @@ function PlantCard({plant}) {
 
   const plantWants = plant.plant_wants?.map((want) => want)
   // // const plantTolerates = plant.plant_tolerates.map((tolerate) => tolerate)
-  const plantTolerateOptions = plant.plant_tolerates?.map((option) => option)
-  const toleratesOptions = plantTolerateOptions[0]
+  // const plantTolerateOptions = plant.plant_tolerates?.map((option) => option)
+  // const toleratesOptions = plantTolerateOptions[0]
 
-  const plantToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === true)
-  const plantNoToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === false)
+  // const plantToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === true)
+  // const plantNoToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === false)
 
   // console.log("planttoleratesoptions", plantTolerateOptions)
   // console.log("tolerates obj?", toleratesOptions)

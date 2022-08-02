@@ -3,16 +3,16 @@ class PlantsController < ApplicationController
     skip_before_action :authenticate_user, only: [:index, :show]
 
     def index
-        render json: Plant.all
+        render json: Plant.all, include: :plant_wants
     end
 
     def show
-        render json: @plant
+        render json: @plant, include: :plant_wants
     end
 
-    # is current user going to be problem here? maybe because only through not yet existing joiner?
     def create 
-        plant = current_user.plants.create!(plant_params)
+        # plant = current_user.plants.create!(plant_params)
+        plant = Plant.create!(plant_params)
         render json: plant, status: :created
     end
 
