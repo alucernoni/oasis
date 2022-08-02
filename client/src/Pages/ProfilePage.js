@@ -1,10 +1,43 @@
-import { Center, Box, Image, Stack, Text, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, InputRightElement, InputGroup, FormHelperText } from '@chakra-ui/react'
+import { Center, Box, Image, Stack, Text, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, InputRightElement, InputGroup, FormHelperText, filter, Alert } from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import ProfileMap from '../Components/ProfileMap'
+import { fetchPlants } from '../Components/PlantsSlice'
+import { useSelector, useDispatch } from 'react-redux'
+// import {moment} from 'react-moment'
+import moment from 'moment'
 
 
-function ProfilePage({user, updateUser}) {
+function ProfilePage({user}) {
+
+    const plantsArray = useSelector((state) => state.plants.entities)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchPlants())
+    }, [dispatch])
+
+    const waterAlerts = () => {
+        // console.log("plantsArray in profile", JSON.stringify(plantsArray, null, 2))
+        const filterPlantsWaterArray = plantsArray.filter((plant) => {
+            const now = moment()
+            const lastWatered = moment(plant.date_last_watered)
+            const nextWatering = lastWatered.add(plant.watering_interval_days, "days")
+
+            return (now >= nextWatering)
+        })
+        // console.log("water filter:", filterPlantsWaterArray)
+        return filterPlantsWaterArray.map((plant) => (
+        <Stack direction="row">
+            <Alert key={plant.id}>
+                {plant.common_name} needs water!
+            </Alert> 
+            <Button> Mark as watered! </Button>
+        </Stack>
+        ))
+    }
+
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const [showPassword, setShowPassword] = useState(false)
@@ -245,6 +278,9 @@ function ProfilePage({user, updateUser}) {
         </Stack>
         <Text>Bio:</Text>
         <Text>{user.bio}</Text>
+        <Stack>
+            {waterAlerts()}
+        </Stack>
         <NavLink to='/myplants'>See my plants</NavLink>
         <NavLink to="/wishlist">View Wishlist</NavLink>
         <ProfileMap/>

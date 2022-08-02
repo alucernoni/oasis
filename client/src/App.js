@@ -42,10 +42,6 @@ function App() {
     }
   });
 
-  const updateUser = (newdata) =>{
-    
-  }
-
 
   // cloud_name: "oasiscloud"
   // api_key: "181934539793869"
@@ -57,7 +53,26 @@ function App() {
 
   // The URL of the image is: https://res.cloudinary.com/demo/image/upload/sample
 
-  // Render the image in a React component.
+  // const plantTasksLoop = () => {
+  //   setTimeout(() => console.log("ping"), 1000)
+  // }
+  // plantTasksLoop()
+
+  // const setTimeOutAsync = async(ms) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(resolve, ms)
+  //   })
+  // }
+
+  // const plantTaskLoopHelper = async() => {
+  //   while (true) {
+  //     // setTimeout(() => console.log("ping"), 1000)
+  //     await setTimeOutAsync(5000)
+  //     console.log('ping2')
+  //   }
+  // }
+
+  // plantTaskLoopHelper()
 
   if (!user) return (
     <>
@@ -75,7 +90,7 @@ function App() {
         <NavBar user={user} setUser={setUser}/>
         <Routes>
           <Route path="/homepage" element={<HomePage/>}/>
-          <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} updateUser={updateUser}/>} />
+          <Route path="/profile" element={<ProfilePage user={user} setUser={setUser} />} />
           <Route path= "/myplants" element= {<MyPlantsPage user={user}/>} />
           <Route path= "/wishlist" element= {<Wishlist user={user}/>} />
         </Routes>

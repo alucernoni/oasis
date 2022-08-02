@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :user_plant_tasks
+    has_many :user_plant_tasks, dependent: :destroy
     has_many :plants, through: :user_plant_tasks
 
     has_secure_password
