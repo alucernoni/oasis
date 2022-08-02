@@ -18,7 +18,7 @@ class PlantsController < ApplicationController
 
     def update 
         @plant.update!(update_plant_params)
-        render json: plant, status: :accepted
+        render json: @plant, status: :accepted
     end
 
     def destroy 
