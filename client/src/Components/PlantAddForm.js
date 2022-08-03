@@ -13,18 +13,71 @@ function PlantAddForm() {
         description: "",
         care_and_conditions_overview: "",
         plant_image_url: "",
-        watering_interval_days: 7
+        difficulty_level: "",
+        watering_interval_days: ""
     }
 
     const plantWantsIntitialState = {
-        ideal_water_frequency
+        ideal_water_frequency: "",
+        ideal_light_level: "",
+        ideal_food_frequency: "",
+        plant_id: ""
+    }
+
+    const plantToleratesInitialState = {
+        low_light: false,
+        indirect_light: true,
+        full_light: false,
+        drought: true,
+        overwatering: false
     }
 
     const [newPlantForm, setNewPlantForm] = useState(plantInitialState)
+    const [newPlantWantsForm, setNewPlantWantsForm] = useState(plantWantsIntitialState)
+    const [newPlantToleratesForm, setNewPlantToleratesForm] = useState(plantToleratesInitialState)
+    const [newestPlant, setNewestPlant] = useState({})
+    const isInvalid = newPlantForm.difficulty_level < 1 || newPlantForm.difficulty_level > 5
+
+    const fixPlant = () => { 
+            console.log("newest plant", newestPlant)
+
+            const newPlantWants = {
+                ideal_water_frequency: newPlantWantsForm.ideal_water_frequency,
+                ideal_light_level: newPlantWantsForm.ideal_light_level,
+                ideal_food_frequency: newPlantWantsForm.ideal_food_frequency,
+                plant_id: newestPlant.id
+            }
+
+            const config2 = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+                body: JSON.stringify(newPlantWants)
+            }
+            fetch('/plant_wants', config2)
+            .then(r => r.json())
+            .then(setNewPlantWantsForm(plantWantsIntitialState))
+            .then(setNewPlantForm(plantInitialState))
+        }
 
     const handleChange= (e) => {
         setNewPlantForm({
             ...newPlantForm,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleWantsChange = (e) => {
+        setNewPlantWantsForm({
+            ...newPlantWantsForm,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleToleratesChange = (e) => {
+        setNewPlantToleratesForm({
+            ...newPlantToleratesForm,
             [e.target.name]: e.target.value
         })
     }
@@ -50,6 +103,7 @@ function PlantAddForm() {
                 description: newPlantForm.description,
                 care_and_conditions_overview: newPlantForm.care_and_conditions_overview,
                 plant_image_url: imageURL,
+                difficulty_level: newPlantForm.difficulty_level,
                 watering_interval_days: newPlantForm.watering_interval_days
             }
 
@@ -58,14 +112,38 @@ function PlantAddForm() {
                 headers: {
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify(newPlant)
+                body: JSON.stringify(newPlant)
             }
             fetch('/plants', config)
             .then(r => r.json())
-            .then(newestPlant => newestPlant)
+            .then((data) => setNewestPlant(data))
+            .then((newestPlant1) => {
+                console.log("newest plant", newestPlant1)
+                console.log("newest plant before fix plant", newestPlant)
+                fixPlant()
+            })
+            // .then(() => {
+            //     // console.log("newest plant", newestPlant)
+            //     console.log("newest plant 1", newestPlant)
+            //     const newPlantWants = {
+            //         ideal_water_frequency: newPlantWantsForm.ideal_water_frequency,
+            //         ideal_light_level: newPlantWantsForm.ideal_light_level,
+            //         ideal_food_frequency: newPlantWantsForm.ideal_food_frequency,
+            //         plant_id: 23
+            //     }
 
-
-            .then(setNewPlantForm(plantInitialState))
+            //     const config2 = {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //           },
+            //         body: JSON.stringify(newPlantWants)
+            //     }
+            //     fetch('/plant_wants', config2)
+            //     .then(r => r.json())
+            //     .then(setNewPlantWantsForm(plantWantsIntitialState))
+            //     .then(setNewPlantForm(plantInitialState))
+            // })
         })
     }
 
@@ -83,6 +161,7 @@ function PlantAddForm() {
                     <FormLabel>Common Name</FormLabel>
                     <Input
                         placeholder= "Common Name"
+                        isRequired
                         name= "common_name"
                         id= "common_name"
                         value= {newPlantForm.common_name}
@@ -93,6 +172,7 @@ function PlantAddForm() {
                     <FormLabel>Scientific Name</FormLabel>
                     <Input
                         placeholder="Scientific Name"
+                        isRequired
                         name= "scientific_name"
                         id= "scientific_name"
                         value= {newPlantForm.scientific_name}
@@ -103,6 +183,7 @@ function PlantAddForm() {
                     <FormLabel>Description</FormLabel>
                     <Input
                     type='text'
+                    isRequired
                     placeholder= "Brief description of plant"
                     name= "description"
                     id= "description"
@@ -114,6 +195,7 @@ function PlantAddForm() {
                     <FormLabel>Care and Conditions Overview</FormLabel>
                     <Input
                     type= 'text'
+                    isRequired
                     placeholder= "Brief overview of plant care and preferred conditions"
                     name= "care_and_conditions_overview"
                     id= "care_and_conditions_overview"
@@ -121,10 +203,11 @@ function PlantAddForm() {
                     onChange={handleChange}
                     />
                 </FormControl>
-                <FormControl>
+                <FormControl mt={4}>
                     <FormLabel>Plant Image</FormLabel>
                     <Input
                         placeholder='Upload an image'
+                        isRequired
                         type="file"
                         accept='image/*'
                         name='plant_image_url'
@@ -132,10 +215,23 @@ function PlantAddForm() {
                         onChange={(e) => setImageSelected(e.target.files[0])}
                     />
                 </FormControl>
-                <FormControl>
-                    <FormLabel>Watering Frequency</FormLabel>
+                <FormControl mt={4}>
+                    <FormLabel>Difficulty Level</FormLabel>
+                    <Input
+                        placeholder='Difficulty between 1-5'
+                        isRequired
+                        type="number"
+                        name='difficulty_level'
+                        id="difficulty_level"
+                        value={newPlantForm.difficulty_level}
+                        onChange={handleChange}
+                    />
+                </FormControl>
+                <FormControl mt={4}>
+                    <FormLabel>Watering Frequency (numerical)</FormLabel>
                     <Input
                         placeholder='Water every __ days'
+                        isRequired
                         type="number"
                         name='watering_interval_days'
                         id="watering_interval_days"
@@ -144,8 +240,44 @@ function PlantAddForm() {
                     />
                     <FormHelperText>Please enter only the number of days between waterings</FormHelperText>
                 </FormControl>
-                <FormControl>
-                    <Button type='submit' onClick={handleAddPlant}>Add Plant!</Button>
+                <FormControl mt={4}>
+                    <FormLabel>Ideal Watering</FormLabel>
+                    <Input
+                        placeholder='e.g: Every 1-2 weeks in the summer, less if in low light'
+                        isRequired
+                        name='ideal_water_frequency'
+                        id='ideal_water_frequency'
+                        value={newPlantWantsForm.ideal_water_frequency}
+                        onChange={handleWantsChange}
+                    />
+                </FormControl>
+                <FormControl mt={4}>
+                    <FormLabel>Ideal Light Level</FormLabel>
+                    <Input
+                        placeholder='e.g: Bright, indirect light'
+                        isRequired
+                        name='ideal_light_level'
+                        id='ideal_light_level'
+                        value={newPlantWantsForm.ideal_light_level}
+                        onChange={handleWantsChange}
+                    />
+                </FormControl>
+                <FormControl mt={4}>
+                    <FormLabel>Ideal Fertilization</FormLabel>
+                    <Input
+                        placeholder='e.g: Fertilize every 2 months in summer at 1/2 strength'
+                        isRequired
+                        name='ideal_food_frequency'
+                        id='ideal_food_frequency'
+                        value={newPlantWantsForm.ideal_food_frequency}
+                        onChange={handleWantsChange}
+                    />
+                </FormControl>
+                <FormControl mt={4}>
+                    <FormLabel>Tolerances?</FormLabel>
+                </FormControl>
+                <FormControl mt={4}>
+                    <Button type='submit' disabled={isInvalid} onClick={handleAddPlant}>Add Plant!</Button>
                 </FormControl>
             </ModalBody>
         </ModalContent>

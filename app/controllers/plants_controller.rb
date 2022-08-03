@@ -35,7 +35,7 @@ class PlantsController < ApplicationController
     end
 
     def plant_params
-        params.permit(:common_name, :scientific_name, :description, :care_and_conditions_overview, :plant_image_url, :difficulty_level)
+        params.permit(:common_name, :scientific_name, :description, :care_and_conditions_overview, :plant_image_url, :difficulty_level, :watering_interval_days)
     end
 
     def update_plant_params

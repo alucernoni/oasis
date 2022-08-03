@@ -1,5 +1,5 @@
 class PlantWantsController < ApplicationController
-    skip_before_action :authenticate_user
+    skip_before_action :authenticate_user, only: [:index, :show]
 
     def index 
         render json: PlantWant.all
@@ -11,7 +11,7 @@ class PlantWantsController < ApplicationController
 
     def create 
         plant_wants = PlantWant.create!(wants_params)
-        render json: @plant_wants, status: :created
+        render json: plant_wants, status: :created, status: :created
     end
 
     def update
@@ -31,7 +31,7 @@ class PlantWantsController < ApplicationController
     end
 
     def wants_params
-        params.permit(:ideal_water_frequency, :ideal_light_level, :ideal_food_frequency :plant)
+        params.permit(:ideal_water_frequency, :ideal_light_level, :ideal_food_frequency, :plant_id)
     end
 
 end
