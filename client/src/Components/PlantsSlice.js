@@ -22,8 +22,9 @@ const plantsSlice = createSlice({
             plant = action.payload
         },
         plantDeleted(state, action) {
-            const plant = state.entities.find((plant) => plant.id === action.payload.id)
-            state.entities.filter((plant) => plant.id !== action.payload.id)
+            // plant wasnt used
+            // const plant = state.entities.find((plant) => plant.id === action.payload)
+            state.entities = state.entities.filter((plant) => plant.id !== action.payload)
         }
     },
     extraReducers: {

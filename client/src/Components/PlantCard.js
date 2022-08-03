@@ -1,23 +1,34 @@
 import React from 'react'
-import {Center, Box, Stack, Image, Modal, ModalHeader, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, Text, useDisclosure, useColorModeValue, Heading, Button} from '@chakra-ui/react'
+import {Center, Box, Stack, Image, Modal, ModalHeader, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, Text, useDisclosure, useColorModeValue, Heading, Button, ButtonGroup} from '@chakra-ui/react'
 import PlantUpdateForm from './PlantUpdateForm'
+import {useDispatch} from 'react-redux'
+import { plantDeleted } from './PlantsSlice'
 
 function PlantCard({plant}) {
 
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const dispatch = useDispatch()
 
   const plantWants = plant.plant_wants?.map((want) => want)
   // // const plantTolerates = plant.plant_tolerates.map((tolerate) => tolerate)
-  const plantTolerateOptions = plant.plant_tolerates?.map((option) => option)
-  const toleratesOptions = plantTolerateOptions[0]
+  // const plantTolerateOptions = plant.plant_tolerates?.map((option) => option)
+  // const toleratesOptions = plantTolerateOptions[0]
 
-  const plantToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === true)
-  const plantNoToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === false)
+  // const plantToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === true)
+  // const plantNoToleratesArray = Object.keys(toleratesOptions).filter( k => toleratesOptions[k] === false)
 
   // console.log("planttoleratesoptions", plantTolerateOptions)
   // console.log("tolerates obj?", toleratesOptions)
   // console.log("plant tolerates true?", plantToleratesArray)
   // console.log("plants tolerates false?", plantNoToleratesArray)
+
+  const handleDelete = () => {
+    fetch(`/plants/${plant.id}`, {
+      method: "DELETE",
+    })
+    dispatch(plantDeleted(plant.id))
+  }
+
 
   return (
     <Center>
@@ -54,7 +65,10 @@ function PlantCard({plant}) {
                       filter: 'blur(20px)',
                     },
                   }}>
-                  <PlantUpdateForm plant={plant}/>
+                  <Stack direction='row'>
+                    <PlantUpdateForm plant={plant}/>
+                    <Button onClick={handleDelete}>X</Button>
+                  </Stack>
                   <Image
                     rounded={'lg'}
                     height={230}
@@ -88,9 +102,9 @@ function PlantCard({plant}) {
                               <Text fontWeight="bold">Overview:</Text>
                               <Text>{plant.care_and_conditions_overview}</Text>
                               <Text fontWeight="bold">Ideal Conditions:</Text>
-                              <Text>Ideal Watering: {plantWants[0].ideal_water_frequency}</Text>
-                              <Text>Ideal Light: {plantWants[0].ideal_light_level}</Text>
-                              <Text>Ideal Fertilization: {plantWants[0].ideal_food_frequency}</Text>
+                              <Text>Ideal Watering: {plantWants[0]?.ideal_water_frequency}</Text>
+                              <Text>Ideal Light: {plantWants[0]?.ideal_light_level}</Text>
+                              <Text>Ideal Fertilization: {plantWants[0]?.ideal_food_frequency}</Text>
                               {/* <Text fontWeight="bold">{plant.common_name} will tolerate:</Text> */}
 n                            </Stack>
                           </ModalBody>

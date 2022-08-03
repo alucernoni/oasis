@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import {Button, Stack} from '@chakra-ui/react'
+import PlantAddForm from './PlantAddForm'
 
 function NavBar({user, setUser}) {
 
@@ -19,6 +20,7 @@ function NavBar({user, setUser}) {
         <nav>
             <Stack direction="row">
                 <NavLink to="/homepage">Home</NavLink>
+                <PlantAddForm/>
                 <NavLink to="/profile">Profile</NavLink>
                 {user ? <Button onClick={handleLogOut} >Log Out</Button> : null}
             </Stack>

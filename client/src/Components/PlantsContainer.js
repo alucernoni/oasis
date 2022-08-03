@@ -33,6 +33,10 @@ function PlantsContainer() {
     const shadePlants= plantsArray?.filter((plant) => plant.plant_tolerates.some((element) => element.low_light) ) 
     const shadePlantsDisplay = shadePlants.map((plant) => <PlantCard key={plant.id} plant= {plant} /> )
 
+    const droughtPlants = plantsArray?.filter((plant) => plant.plant_tolerates.some((el) => el.drought))
+    const droughtPlantsDisplay = droughtPlants.map((plant) => <PlantCard key={plant.id} plant= {plant} /> )
+
+
 
     console.log("shadeplants display?", shadePlantsDisplay)
 
@@ -47,6 +51,10 @@ function PlantsContainer() {
     <Stack direction="row">
       <h1>Shade Plants</h1>
       {shadePlantsDisplay}
+    </Stack>
+    <Stack direction='row'>
+      <h1>Underwatering Plants</h1>
+      {droughtPlantsDisplay}
     </Stack>
     </>
   )
