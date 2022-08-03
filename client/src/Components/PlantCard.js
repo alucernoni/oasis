@@ -1,10 +1,13 @@
 import React from 'react'
-import {Center, Box, Stack, Image, Modal, ModalHeader, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, Text, useDisclosure, useColorModeValue, Heading, Button} from '@chakra-ui/react'
+import {Center, Box, Stack, Image, Modal, ModalHeader, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, Text, useDisclosure, useColorModeValue, Heading, Button, ButtonGroup} from '@chakra-ui/react'
 import PlantUpdateForm from './PlantUpdateForm'
+import {useDispatch} from 'react-redux'
+import { plantDeleted } from './PlantsSlice'
 
 function PlantCard({plant}) {
 
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const dispatch = useDispatch()
 
   const plantWants = plant.plant_wants?.map((want) => want)
   // // const plantTolerates = plant.plant_tolerates.map((tolerate) => tolerate)
@@ -18,6 +21,14 @@ function PlantCard({plant}) {
   // console.log("tolerates obj?", toleratesOptions)
   // console.log("plant tolerates true?", plantToleratesArray)
   // console.log("plants tolerates false?", plantNoToleratesArray)
+
+  const handleDelete = () => {
+    fetch(`/plants/${plant.id}`, {
+      method: "DELETE",
+    })
+    dispatch(plantDeleted(plant.id))
+  }
+
 
   return (
     <Center>
@@ -54,7 +65,10 @@ function PlantCard({plant}) {
                       filter: 'blur(20px)',
                     },
                   }}>
-                  <PlantUpdateForm plant={plant}/>
+                  <Stack direction='row'>
+                    <PlantUpdateForm plant={plant}/>
+                    <Button onClick={handleDelete}>X</Button>
+                  </Stack>
                   <Image
                     rounded={'lg'}
                     height={230}

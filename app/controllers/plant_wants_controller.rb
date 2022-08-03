@@ -11,7 +11,7 @@ class PlantWantsController < ApplicationController
 
     def create 
         plant_wants = PlantWant.create!(wants_params)
-        render json: plant_wants, status: :created, status: :created
+        render json: plant_wants, status: :created
     end
 
     def update

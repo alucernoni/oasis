@@ -38,14 +38,14 @@ function PlantAddForm() {
     const [newestPlant, setNewestPlant] = useState({})
     const isInvalid = newPlantForm.difficulty_level < 1 || newPlantForm.difficulty_level > 5
 
-    const fixPlant = () => { 
+    const fixPlant = (createdPlant) => { 
             console.log("newest plant", newestPlant)
 
             const newPlantWants = {
                 ideal_water_frequency: newPlantWantsForm.ideal_water_frequency,
                 ideal_light_level: newPlantWantsForm.ideal_light_level,
                 ideal_food_frequency: newPlantWantsForm.ideal_food_frequency,
-                plant_id: newestPlant.id
+                plant_id: createdPlant.id
             }
 
             const config2 = {
@@ -88,21 +88,26 @@ function PlantAddForm() {
         const imageFormData = new FormData()
         imageFormData.append("file", imageSelected)
         imageFormData.append("upload_preset", "oasis_preset")
-        imageFormData.append("cloud_name", "oasiscloud")  
+        imageFormData.append("cloud_name", "oasiscloud") 
+        console.log("plant image selected", imageSelected) 
 
         fetch("https://api.cloudinary.com/v1_1/oasiscloud/image/upload",{
             method:"POST",
             body: imageFormData
         })
         .then((r) => r.json())
-        .then((data) => setImageURL(data.url))
-        .then(() => {
+        .then((data) => {
+            setImageURL(data.url)
+            return data.url
+        })
+        .then((imageaddress) => {
+            console.log("image address response", imageaddress)
             const newPlant = {
                 common_name: newPlantForm.common_name,
                 scientific_name: newPlantForm.scientific_name,
                 description: newPlantForm.description,
                 care_and_conditions_overview: newPlantForm.care_and_conditions_overview,
-                plant_image_url: imageURL,
+                plant_image_url: imageaddress,
                 difficulty_level: newPlantForm.difficulty_level,
                 watering_interval_days: newPlantForm.watering_interval_days
             }
@@ -116,11 +121,14 @@ function PlantAddForm() {
             }
             fetch('/plants', config)
             .then(r => r.json())
-            .then((data) => setNewestPlant(data))
-            .then((newestPlant1) => {
-                console.log("newest plant", newestPlant1)
+            .then((createdPlant) => {
+                setNewestPlant(createdPlant)
+                return createdPlant
+            })
+            .then((createdPlant) => {
+                console.log("first fetch resp", createdPlant)
                 console.log("newest plant before fix plant", newestPlant)
-                fixPlant()
+                fixPlant(createdPlant)
             })
             // .then(() => {
             //     // console.log("newest plant", newestPlant)
@@ -129,7 +137,7 @@ function PlantAddForm() {
             //         ideal_water_frequency: newPlantWantsForm.ideal_water_frequency,
             //         ideal_light_level: newPlantWantsForm.ideal_light_level,
             //         ideal_food_frequency: newPlantWantsForm.ideal_food_frequency,
-            //         plant_id: 23
+            //         plant_id: newestPlant.id
             //     }
 
             //     const config2 = {
@@ -183,7 +191,7 @@ function PlantAddForm() {
                     <FormLabel>Description</FormLabel>
                     <Input
                     type='text'
-                    isRequired
+                    // isRequired
                     placeholder= "Brief description of plant"
                     name= "description"
                     id= "description"
@@ -195,7 +203,7 @@ function PlantAddForm() {
                     <FormLabel>Care and Conditions Overview</FormLabel>
                     <Input
                     type= 'text'
-                    isRequired
+                    // isRequired
                     placeholder= "Brief overview of plant care and preferred conditions"
                     name= "care_and_conditions_overview"
                     id= "care_and_conditions_overview"
@@ -219,7 +227,7 @@ function PlantAddForm() {
                     <FormLabel>Difficulty Level</FormLabel>
                     <Input
                         placeholder='Difficulty between 1-5'
-                        isRequired
+                        // isRequired
                         type="number"
                         name='difficulty_level'
                         id="difficulty_level"
@@ -231,7 +239,7 @@ function PlantAddForm() {
                     <FormLabel>Watering Frequency (numerical)</FormLabel>
                     <Input
                         placeholder='Water every __ days'
-                        isRequired
+                        // isRequired
                         type="number"
                         name='watering_interval_days'
                         id="watering_interval_days"

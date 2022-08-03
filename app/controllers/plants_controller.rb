@@ -1,6 +1,6 @@
 class PlantsController < ApplicationController
     before_action :find_plant
-    skip_before_action :authenticate_user, only: [:index, :show]
+    skip_before_action :authenticate_user, only: [:index, :show, :create]
 
     def index
         render json: Plant.all, include: :plant_wants
@@ -35,7 +35,7 @@ class PlantsController < ApplicationController
     end
 
     def plant_params
-        params.permit(:common_name, :scientific_name, :description, :care_and_conditions_overview, :plant_image_url, :difficulty_level, :watering_interval_days)
+        params.permit(:common_name, :scientific_name, :description, :care_and_conditions_overview, :plant_image_url, :difficulty_level, :watering_interval_days, {plant_wants: [:ideal_food_frequency, :ideal_light_level, :ideal_water_frequency]})
     end
 
     def update_plant_params

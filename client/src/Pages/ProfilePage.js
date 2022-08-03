@@ -298,7 +298,7 @@ function ProfilePage({user}) {
             {waterAlerts()}
         </Stack>
         <NavLink to='/myplants'>See my plants</NavLink>
-        <NavLink to="/wishlist">View Wishlist</NavLink>
+        {/* <NavLink to="/wishlist">View Wishlist</NavLink> */}
         <ProfileMap/>
     </Stack>
     </Center>

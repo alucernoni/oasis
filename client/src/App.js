@@ -94,7 +94,6 @@ function App() {
           <Route exact path= "/myplants" element= {<MyPlantsPage user={user}/>} />
           <Route exact path= "/wishlist" element= {<Wishlist user={user}/>} />
         </Routes>
-        <h1>App render</h1>
       </div>
     );
   }
