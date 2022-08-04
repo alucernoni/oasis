@@ -11,12 +11,16 @@ function MyPlantsPage({user}) {
 
 
   return (
-    <Center flexDirection='column'>
-        <Text fontSize='4xl' color="tomato">
+    <div className='outerprofilediv'>
+    <div className='profilediv'>
+    <Center flexDirection='column' pb="60px" >
+        <Text fontSize='4xl' color="tomato" fontWeight={500} pt=" 20px" pb="20px" >
             {user.first_name}'s Plants
         </Text>
     {userPlantsDisplay}
     </Center>
+    </div>
+    </div>
   )
 }
 

@@ -297,9 +297,9 @@ function PlantAddForm() {
                         onChange={handleWantsChange}
                     />
                 </FormControl>
-                <FormControl mt={4}>
+                {/* <FormControl mt={4}>
                     <FormLabel>Tolerances?</FormLabel>
-                </FormControl>
+                </FormControl> */}
                 <FormControl mt={4}>
                     <Button type='submit' disabled={isInvalid} onClick={handleAddPlant}>Add Plant!</Button>
                 </FormControl>

@@ -21,7 +21,7 @@ import HomePage from './Pages/HomePage';
 import ProfilePage from './Pages/ProfilePage';
 import MyPlantsPage from './Pages/MyPlantsPage';
 import Wishlist from './Pages/Wishlist';
-
+import './index.css'
 
 function App() {
 

@@ -46,20 +46,20 @@ function PlantsContainer() {
   return (
     <>
     <Stack justifyContent="center" direction="row" mt="30px">
-      <Text as="h1" fontSize="40px" >Top Beginner Plants</Text>
+      <Text className='font_color' as="h1" fontSize="40px" >Top Beginner Plants</Text>
     </Stack>
     <Stack direction="row" pb="10px" mt="10px" mb="20px" className='cardContainer'>
         PlantsContainer
         {allPlantsDisplay}
     </Stack>
     <Stack justifyContent="center" direction="row" mt="30px">
-      <Text as="h1" fontSize="40px" >Best Plants for Low Light Areas</Text>
+      <Text className='font_color' as="h1" fontSize="40px" >Best Plants for Low Light Areas</Text>
     </Stack>
     <Stack direction="row" mt="20px" className='cardContainer'>
       {shadePlantsDisplay}
     </Stack>
     <Stack justifyContent="center" direction="row" mt="30px">
-      <Text as="h1" fontSize="40px" >Plants for the Forgetful Waterer</Text>
+      <Text className='font_color' as="h1" fontSize="40px" >Plants for the Forgetful Waterer</Text>
     </Stack>
     <Stack direction='row' mt="20px" className='cardContainer'>
       {droughtPlantsDisplay}
