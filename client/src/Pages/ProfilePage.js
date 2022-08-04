@@ -18,10 +18,12 @@ function ProfilePage({user, setUser, onUpdateUser}) {
         dispatch(fetchPlants())
     }, [dispatch])
 
+    const userPlantsArray = user.plants.map((plant) => plant)
+
 
     const waterAlerts = () => {
         // console.log("plantsArray in profile", JSON.stringify(plantsArray, null, 2))
-        const filterPlantsWaterArray = plantsArray?.filter((plant) => {
+        const filterPlantsWaterArray = userPlantsArray?.filter((plant) => {
             const now = moment()
             const lastWatered = moment(plant.date_last_watered)
             const nextWatering = lastWatered.add(plant.watering_interval_days, "days")
