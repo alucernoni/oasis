@@ -37,14 +37,20 @@ function PlantUpdateForm({plant}) {
             body: imageFormData
         })
         .then((r) => r.json())
-        .then((data) => setImageURL(data.url))
-        .then(() => {
+        .then((data) => {
+            setImageURL(data.url)
+            return data.url
+        })
+        .then((imageAddress) => {
             const updatedPlant = {
                 common_name: updatedPlantData.common_name,
                 scientific_name: updatedPlantData.scientific_name,
                 description: updatedPlantData.description,
                 care_and_conditions_overview: updatedPlantData.care_and_conditions_overview,
-                plant_image_url: imageURL,
+                // plant_image_url: imageAddress,
+            }
+            if (imageAddress) {
+                updatedPlant.plant_image_url = imageAddress
             }
             const config = {
                 method: "PATCH",
