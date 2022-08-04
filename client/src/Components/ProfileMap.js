@@ -54,8 +54,9 @@ function ProfileMap() {
     
 
   return (
-    <Stack>
+    <Stack mb="50px" pb="50px" justifyContent="center">
     <Button onClick={setUserLocation}>Jump to my location</Button>
+    <div style={{justifyContent: "center", display:'flex'}}>
     <ReactMapGL
         ref={myMap}
         mapStyle={'mapbox://styles/alucernoni/cl6ab508l000d14n5x7f239zp'}
@@ -79,6 +80,7 @@ function ProfileMap() {
         />
         <NavigationControl/>
     </ReactMapGL>
+    </div>
     </Stack>
   )
 }

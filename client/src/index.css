@@ -1,0 +1,46 @@
+.css-4oico3:hover {
+    background: transparent !important;
+}
+
+#home_link {
+    font-size: 26px;
+}
+
+.cardContainer {
+    max-width: 100vw;
+    height: 700px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0px 20px;
+    margin-right: 20px;
+}
+
+.App {
+    background-image: url('https://res.cloudinary.com/oasiscloud/image/upload/v1659640830/yusron-el-jihan-I73V58XW2cM-unsplash_cc27zh.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+.font_color {
+    color: blanchedalmond;
+}
+
+.outerprofilediv {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 80vh;
+    /* margin-top: 40px; */
+}
+ 
+
+.profilediv {
+    background-color: blanchedalmond;
+    height: 90vh;
+    width: 50vw;
+    overflow: auto;
+    /* display: flex;
+    justify-content: center; */
+}

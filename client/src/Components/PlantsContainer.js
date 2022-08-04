@@ -2,7 +2,8 @@ import React, {useEffect} from 'react'
 import PlantCard from './PlantCard'
 import { fetchPlants } from '../Components/PlantsSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { Stack } from '@chakra-ui/react'
+import { Stack, Text} from '@chakra-ui/react'
+import "../index.css"
 
 
 
@@ -44,16 +45,23 @@ function PlantsContainer() {
 
   return (
     <>
-    <Stack direction="row">
+    <Stack justifyContent="center" direction="row" mt="30px">
+      <Text className='font_color' as="h1" fontSize="40px" >Top Beginner Plants</Text>
+    </Stack>
+    <Stack direction="row" pb="10px" mt="10px" mb="20px" className='cardContainer'>
         PlantsContainer
         {allPlantsDisplay}
     </Stack>
-    <Stack direction="row">
-      <h1>Shade Plants</h1>
+    <Stack justifyContent="center" direction="row" mt="30px">
+      <Text className='font_color' as="h1" fontSize="40px" >Best Plants for Low Light Areas</Text>
+    </Stack>
+    <Stack direction="row" mt="20px" className='cardContainer'>
       {shadePlantsDisplay}
     </Stack>
-    <Stack direction='row'>
-      <h1>Underwatering Plants</h1>
+    <Stack justifyContent="center" direction="row" mt="30px">
+      <Text className='font_color' as="h1" fontSize="40px" >Plants for the Forgetful Waterer</Text>
+    </Stack>
+    <Stack direction='row' mt="20px" className='cardContainer'>
       {droughtPlantsDisplay}
     </Stack>
     </>

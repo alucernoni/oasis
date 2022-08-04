@@ -2,7 +2,7 @@ import { Center, Box, Image, Stack, Text, Button, useDisclosure, Modal, ModalOve
 import React, {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import ProfileMap from '../Components/ProfileMap'
-import { fetchPlants, plantUpdated } from '../Components/PlantsSlice'
+import { fetchPlants } from '../Components/PlantsSlice'
 import { useSelector, useDispatch } from 'react-redux'
 // import {moment} from 'react-moment'
 import moment from 'moment'
@@ -11,19 +11,17 @@ import moment from 'moment'
 function ProfilePage({user, setUser, onUpdateUser}) {
 
     const plantsArray = useSelector((state) => state.plants.entities)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchPlants())
     }, [dispatch])
 
-    // const userPlantsArray = user.plants.map((plant) => plant)
-    const userPlantsArray = plantsArray?.filter((plant) => plant.users.some((el) => el.id === user.id))
-
 
     const waterAlerts = () => {
         // console.log("plantsArray in profile", JSON.stringify(plantsArray, null, 2))
-        const filterPlantsWaterArray = userPlantsArray?.filter((plant) => {
+        const filterPlantsWaterArray = plantsArray?.filter((plant) => {
             const now = moment()
             const lastWatered = moment(plant.date_last_watered)
             const nextWatering = lastWatered.add(plant.watering_interval_days, "days")
@@ -54,9 +52,6 @@ function ProfilePage({user, setUser, onUpdateUser}) {
         }
         fetch(`plants/${plant.id}`, config)
         .then(r => r.json())
-        .then((wateringUpdate) => {
-            dispatch(plantUpdated(wateringUpdate))
-        })
     }
 
 
@@ -148,11 +143,12 @@ function ProfilePage({user, setUser, onUpdateUser}) {
     }
 
   return (
-    // <div>ProfilePage</div>
+    <div className='outerprofilediv' >
+    <div className='profilediv' >
     <Center>
     <Stack>
-        <Stack direction='row'>
-            <Box>
+        <Stack direction='row' justifyContent="space-between" pt="50px">
+            <Box pb="20px" >
                 <Image
                     rounded={'lg'}
                     borderRadius='full'
@@ -305,23 +301,29 @@ function ProfilePage({user, setUser, onUpdateUser}) {
                 </ModalContent>
             </Modal>
         </Stack>
-        <Text>
+        <Text fontWeight={700} pb="5px" >
             {user.username}
         </Text>
         <Stack direction='row'>
             <Text>{user.first_name} {user.last_name}</Text>
-            <Text>{user.city}, {user.state}</Text>
         </Stack>
-        <Text>Bio:</Text>
+        <Text pb="20px" >{user.city}, {user.state}</Text>
+        <Text fontWeight={700} >Bio:</Text>
         <Text>{user.bio}</Text>
         <Stack>
             {waterAlerts()}
         </Stack>
-        <NavLink to='/myplants'>See my plants</NavLink>
+        <Stack direction="row" justifyContent="center">
+            <Button w="635px" >
+            <NavLink to='/myplants'>See my plants</NavLink>
+            </Button>
+        </Stack>
         {/* <NavLink to="/wishlist">View Wishlist</NavLink> */}
         <ProfileMap/>
     </Stack>
     </Center>
+    </div>
+    </div>
   )
 }
 

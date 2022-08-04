@@ -79,7 +79,7 @@ function PlantUpdateForm({plant}) {
 
   return (
     <div>
-        <Button onClick={onOpen}>edit</Button>
+        <Button onClick={onOpen}>Edit</Button>
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay/>
             <ModalContent>
@@ -128,7 +128,7 @@ function PlantUpdateForm({plant}) {
                         onChange={handleChange}
                         />
                     </FormControl>
-                    <FormControl>
+                    <FormControl mt={4}>
                         <FormLabel>{plant.common_name} Image</FormLabel>
                         <Input
                             placeholder='Upload an image'
@@ -139,7 +139,7 @@ function PlantUpdateForm({plant}) {
                             onChange={(e) => setImageSelected(e.target.files[0])}
                         />
                     </FormControl>
-                    <FormControl>
+                    <FormControl mt={4}>
                         <Button type='submit' onClick={saveChanges}>Save Changes</Button>
                     </FormControl>
                 </ModalBody>

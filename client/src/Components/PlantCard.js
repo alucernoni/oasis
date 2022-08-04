@@ -31,19 +31,24 @@ function PlantCard({plant}) {
 
 
   return (
+    <div style={{height:'500px'}}>
     <Center>
-        <Stack direction='row'>
+        <Stack direction='row' >
+          
         <Box role={'group'}
             p={6}
             paddingTop={20}
             paddingBottom={5}
             maxW={'330px'}
-            w={'full'}
+            w={'350px'}
+            // h="100%"
+            minHeight="650px"
             bg={useColorModeValue('white', 'gray.800')}
             boxShadow={'2xl'}
             rounded={'lg'}
-            pos={'relative'}
-            zIndex={1}>
+            // pos={'relative'}
+            // zIndex={1}
+            >
             <Box rounded={'lg'}
                 mt={-12}
                 pos={'relative'}
@@ -65,7 +70,7 @@ function PlantCard({plant}) {
                       filter: 'blur(20px)',
                     },
                   }}>
-                  <Stack direction='row'>
+                  <Stack direction='row' justifyContent="space-between" >
                     <PlantUpdateForm plant={plant}/>
                     <Button onClick={handleDelete}>X</Button>
                   </Stack>
@@ -113,8 +118,10 @@ n                            </Stack>
                   </Stack>
                 </Stack>
             </Box>
+            
         </Stack>
     </Center>
+    </div>
   )
 }
 
