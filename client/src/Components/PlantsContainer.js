@@ -44,15 +44,15 @@ function PlantsContainer() {
 
   return (
     <>
-    <Stack direction="row">
+    <Stack direction="row" pb="10px" mt="75px" mb="100px">
         PlantsContainer
         {allPlantsDisplay}
     </Stack>
-    <Stack direction="row">
+    <Stack direction="row" mt="200px" >
       <h1>Shade Plants</h1>
       {shadePlantsDisplay}
     </Stack>
-    <Stack direction='row'>
+    <Stack direction='row' mt="200px" >
       <h1>Underwatering Plants</h1>
       {droughtPlantsDisplay}
     </Stack>
