@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import {Button, useDisclosure, Modal, ModalOverlay, ModalCloseButton, ModalContent, ModalHeader, ModalBody, FormControl, FormLabel, Input, FormHelperText} from '@chakra-ui/react'
+import {Button, useDisclosure, Modal, ModalOverlay, ModalCloseButton, ModalContent, ModalHeader, ModalBody, FormControl, FormLabel, Input, FormHelperText, IconButton, Image} from '@chakra-ui/react'
 import {useDispatch} from 'react-redux'
 import {plantAdded} from './PlantsSlice'
+import '../index.css'
 
 function PlantAddForm() {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -164,7 +165,16 @@ function PlantAddForm() {
 
   return (
     <div>
-        <Button onClick={onOpen}>Add a new plant!</Button>
+        <IconButton id="plant_add" aria-label='Add a new plant!' onClick={onOpen} backgroundColor="transparent"  >
+            <Image
+                src='https://res.cloudinary.com/oasiscloud/image/upload/v1659635370/AddPlantIcon_1_h2bz8a.png'
+                alt='Add a new plant!'
+                height= "45px"
+                borderRadius="full"
+            />
+        </IconButton>
+
+        {/* <Button onClick={onOpen}>Add a new plant!</Button> */}
         <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay/>
         <ModalContent>
