@@ -79,7 +79,7 @@ function PlantUpdateForm({plant}) {
 
   return (
     <div>
-        <Button onClick={onOpen}>edit</Button>
+        <Button onClick={onOpen}>Edit</Button>
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay/>
             <ModalContent>

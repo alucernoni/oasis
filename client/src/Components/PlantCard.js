@@ -70,7 +70,7 @@ function PlantCard({plant}) {
                       filter: 'blur(20px)',
                     },
                   }}>
-                  <Stack direction='row'>
+                  <Stack direction='row' justifyContent="space-between" >
                     <PlantUpdateForm plant={plant}/>
                     <Button onClick={handleDelete}>X</Button>
                   </Stack>
