@@ -98,15 +98,18 @@ function ProfilePage({user}) {
             body: imageFormData
         })
         .then((r) => r.json())
-        .then((data) => setImageURL(data.url))
+        .then((data) => {
+            setImageURL(data.url)
+            return data.url
+        })
         // .catch((err) => console.log(err))
-        .then(() => {
+        .then((imageaddress) => {
             const updatedProfile = {
                 first_name: newUserData.first_name,
                 last_name: newUserData.last_name,
                 username: newUserData.username,
                 bio: newUserData.bio,
-                profile_image: imageURL,
+                // profile_image: imageaddress,
                 email: newUserData.email,
                 city: newUserData.city,
                 state: newUserData.state,
@@ -114,6 +117,9 @@ function ProfilePage({user}) {
                 password: newUserData.password,
                 password_confirmation: newUserData.password_confirmation
                 }
+            if (imageaddress) {
+                updatedProfile.profile_image = imageaddress
+            }
             const config = {
                 method: "PATCH",
                 headers: {
