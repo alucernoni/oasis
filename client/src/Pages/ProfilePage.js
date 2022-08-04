@@ -70,12 +70,12 @@ function ProfilePage({user}) {
         city: `${user.city}`,
         state: `${user.state}`,
         zipcode: `${user.zipcode}`,
-        // password: "",
-        // password_confirmation: ""
+        password: "",
+        password_confirmation: ""
     }
 
     const [newUserData, setNewUserData] = useState(initialState)
-    const isInvalid = newUserData.password !== newUserData.password_confirmation
+    const isInvalid = newUserData.password !== newUserData.password_confirmation || newUserData.password === "" || newUserData.password_confirmation === ""
 
     const handleChange = (e) => {
         setNewUserData({
@@ -207,9 +207,10 @@ function ProfilePage({user}) {
                                 </Button>
                             </InputRightElement>
                             </InputGroup>
-                            <FormHelperText>Password must be at least 8 characters and contain 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character</FormHelperText>
+                            <FormHelperText>Enter or update password to edit profile</FormHelperText>
+                            <FormHelperText mt={4}>Password must be at least 8 characters and contain 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character</FormHelperText>
                         </FormControl>
-                        <FormControl>
+                        <FormControl mt={4}>
                             <FormLabel>
                                 Password Confirmation
                             </FormLabel>
@@ -285,7 +286,7 @@ function ProfilePage({user}) {
                         </FormControl>
                         <FormControl>
                         <Button type='submit' disabled={isInvalid} onClick={saveChanges}>Save Changes</Button>
-                        {/* <FormHelperText>If Sign Up! button is unclickable, please doublecheck that your password entries match!</FormHelperText> */}
+                        <FormHelperText>If button isn't clickable, ensure password has been entered</FormHelperText>
                     </FormControl>
                     </ModalBody>
                 </ModalContent>
