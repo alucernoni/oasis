@@ -17,9 +17,18 @@ const plantsSlice = createSlice({
         plantAdded(state, action) {
             state.entities.push(action.payload)
         },
+        // plantUpdated(state, action) {
+        //     const plant = state.entities.find((plant) => plant.id === action.payload.id)
+        //     plant = action.payload
+        // },
         plantUpdated(state, action) {
-            const plant = state.entities.find((plant) => plant.id === action.payload.id)
-            plant = action.payload
+            state.entities = state.entities.map((plant) => {
+                if (plant.id === action.payload.id) {
+                    return action.payload
+                } else {
+                    return plant
+                }
+            })
         },
         plantDeleted(state, action) {
             // plant wasnt used
