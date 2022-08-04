@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 
 
-function ProfilePage({user}) {
+function ProfilePage({user, setUser, onUpdateUser}) {
 
     const plantsArray = useSelector((state) => state.plants.entities)
 
@@ -129,8 +129,16 @@ function ProfilePage({user}) {
                 }
             fetch(`/users/${user.id}`, config)
             .then(r => r.json())
+            .then((returnedUserUpdate) => {
+                console.log("returned user", returnedUserUpdate)
+                setUser({...returnedUserUpdate})
+            })
+            // .then((returnedUserUpdate) => {
+                // onUpdateUser(returnedUserUpdate)
+                setNewUserData(initialState)
+            // })
             // .then(updateUser)
-            .then(setNewUserData(initialState))
+            // .then(setNewUserData(initialState))
         })
     }
 
@@ -296,7 +304,7 @@ function ProfilePage({user}) {
             {user.username}
         </Text>
         <Stack direction='row'>
-            <Text>{user.first_name}{user.last_name}</Text>
+            <Text>{user.first_name} {user.last_name}</Text>
             <Text>{user.city}, {user.state}</Text>
         </Stack>
         <Text>Bio:</Text>
