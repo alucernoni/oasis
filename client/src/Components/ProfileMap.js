@@ -11,8 +11,8 @@ import { Stack, Button} from '@chakra-ui/react';
 function ProfileMap() {
 
     const [viewport, setViewport] = useState({
-        latitude: 47.6062,
-        longitude: -122.3321,
+        latitude: 37.7749,
+        longitude: -122.4194,
         zoom: 10,
         width: 500,
         height: 500
