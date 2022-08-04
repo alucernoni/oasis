@@ -1,10 +1,16 @@
 import React, {useState} from 'react'
 import {Button, useDisclosure, Modal, ModalOverlay, ModalCloseButton, ModalContent, ModalHeader, ModalBody, FormControl, FormLabel, Input} from '@chakra-ui/react'
+import { useDispatch } from 'react-redux'
+import { plantUpdated } from './PlantsSlice'
+
+
 
 function PlantUpdateForm({plant}) {
     const {isOpen, onOpen, onClose} = useDisclosure()
     const [imageSelected, setImageSelected] = useState("")
     const [imageURL, setImageURL] = useState("")
+    const dispatch = useDispatch()
+
 
     const initialState = {
         common_name: plant.common_name,
@@ -61,7 +67,13 @@ function PlantUpdateForm({plant}) {
                 }
             fetch(`/plants/${plant.id}`, config)
             .then(r => r.json())
-            .then(setUpdatedPlantData(initialState))
+            .then((returnedPlantUpdate) => {
+                return returnedPlantUpdate
+            })
+            .then((returnedPlantUpdate) => {
+                dispatch(plantUpdated(returnedPlantUpdate))
+                setUpdatedPlantData(initialState)
+            })
         })
     }
 

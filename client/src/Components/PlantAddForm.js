@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import {Button, useDisclosure, Modal, ModalOverlay, ModalCloseButton, ModalContent, ModalHeader, ModalBody, FormControl, FormLabel, Input, FormHelperText} from '@chakra-ui/react'
-
+import {useDispatch} from 'react-redux'
+import {plantAdded} from './PlantsSlice'
 
 function PlantAddForm() {
     const {isOpen, onOpen, onClose} = useDisclosure()
     const [imageSelected, setImageSelected] = useState("")
     const [imageURL, setImageURL] = useState("")
+    const dispatch = useDispatch()
 
     const plantInitialState = {
         common_name: "",
@@ -122,12 +124,15 @@ function PlantAddForm() {
             fetch('/plants', config)
             .then(r => r.json())
             .then((createdPlant) => {
-                setNewestPlant(createdPlant)
+                // setNewestPlant(createdPlant)
                 return createdPlant
             })
             .then((createdPlant) => {
                 console.log("first fetch resp", createdPlant)
                 console.log("newest plant before fix plant", newestPlant)
+                setNewestPlant(createdPlant)
+                dispatch(plantAdded(createdPlant))
+                console.log("for redux obj2", newestPlant)
                 fixPlant(createdPlant)
             })
             // .then(() => {
@@ -153,6 +158,7 @@ function PlantAddForm() {
             //     .then(setNewPlantForm(plantInitialState))
             // })
         })
+        console.log("for redux obj", newestPlant)
     }
 
 
