@@ -2,7 +2,7 @@ import { Center, Box, Image, Stack, Text, Button, useDisclosure, Modal, ModalOve
 import React, {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import ProfileMap from '../Components/ProfileMap'
-import { fetchPlants } from '../Components/PlantsSlice'
+import { fetchPlants, plantUpdated } from '../Components/PlantsSlice'
 import { useSelector, useDispatch } from 'react-redux'
 // import {moment} from 'react-moment'
 import moment from 'moment'
@@ -11,17 +11,19 @@ import moment from 'moment'
 function ProfilePage({user, setUser, onUpdateUser}) {
 
     const plantsArray = useSelector((state) => state.plants.entities)
-
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchPlants())
     }, [dispatch])
 
+    // const userPlantsArray = user.plants.map((plant) => plant)
+    const userPlantsArray = plantsArray?.filter((plant) => plant.users.some((el) => el.id === user.id))
+
 
     const waterAlerts = () => {
         // console.log("plantsArray in profile", JSON.stringify(plantsArray, null, 2))
-        const filterPlantsWaterArray = plantsArray?.filter((plant) => {
+        const filterPlantsWaterArray = userPlantsArray?.filter((plant) => {
             const now = moment()
             const lastWatered = moment(plant.date_last_watered)
             const nextWatering = lastWatered.add(plant.watering_interval_days, "days")
@@ -52,6 +54,9 @@ function ProfilePage({user, setUser, onUpdateUser}) {
         }
         fetch(`plants/${plant.id}`, config)
         .then(r => r.json())
+        .then((wateringUpdate) => {
+            dispatch(plantUpdated(wateringUpdate))
+        })
     }
 
 
