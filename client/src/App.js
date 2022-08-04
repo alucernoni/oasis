@@ -35,6 +35,15 @@ function App() {
     })
   }, [])
 
+  const onUpdateUser = (updatedUser) => {
+    // const updatedUser = if (user.id === updatedUserObj.id) {
+    //   return updatedUserObj
+    // } else {
+    //   return user
+    // }
+    setUser(updatedUser)
+  }
+
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
     cloud: {
@@ -90,7 +99,7 @@ function App() {
         <NavBar user={user} setUser={setUser}/>
         <Routes>
           <Route exact path="/homepage" element={<HomePage/>}/>
-          <Route exact path="/profile" element={<ProfilePage user={user} setUser={setUser} />} />
+          <Route exact path="/profile" element={<ProfilePage user={user} setUser={setUser} onUpdateUser={onUpdateUser}/>} />
           <Route exact path= "/myplants" element= {<MyPlantsPage user={user}/>} />
           <Route exact path= "/wishlist" element= {<Wishlist user={user}/>} />
         </Routes>
