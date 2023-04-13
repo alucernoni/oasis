@@ -38,6 +38,9 @@ Oasis is a web application designed to help wanna-be plant parents (who weren't 
 
 https://user-images.githubusercontent.com/102399239/231902938-8bf0ca86-2e33-45aa-91e1-ceac940c0a73.mov
 
+<img width="1440" alt="Screen Shot 2023-04-13 at 11 40 45 AM" src="https://user-images.githubusercontent.com/102399239/231903153-41baa718-d554-4b20-aa46-48452b1c1143.png">
+
+
 
 ## Set Up and Installation
 
